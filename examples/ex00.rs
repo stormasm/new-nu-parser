@@ -4,8 +4,6 @@ use std::process::exit;
 
 use new_nu_parser::compiler::Compiler;
 use new_nu_parser::parser::Parser;
-//use new_nu_parser::resolver::Resolver;
-//use new_nu_parser::typechecker::Typechecker;
 
 fn main() {
     let mut compiler = Compiler::new();
@@ -29,22 +27,5 @@ fn main() {
         if !compiler.errors.is_empty() {
             exit(1);
         }
-        /*
-        let mut resolver = Resolver::new(&compiler);
-        resolver.resolve();
-        resolver.print();
-
-        compiler.merge_name_bindings(resolver.to_name_bindings());
-
-        if !compiler.errors.is_empty() {
-            exit(1);
-        }
-
-        let mut typechecker = Typechecker::new(&compiler);
-        typechecker.typecheck();
-        typechecker.print();
-
-        compiler.merge_types(typechecker.to_types());
-        */
     }
 }
