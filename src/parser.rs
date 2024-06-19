@@ -427,6 +427,7 @@ impl Parser {
         };
 
         loop {
+            //println!("simple_expression loop");
             if self.is_horizontal_space() {
                 return expr;
             } else if self.is_dotdot() {
@@ -643,6 +644,7 @@ impl Parser {
 
         // Explicit closure case
         if self.is_pipe() {
+            println!("explicit closure");
             let args = Some(self.closure_params());
             let block = self.block(BlockContext::Closure);
             self.rcurly();
@@ -1654,6 +1656,7 @@ impl Parser {
             start: span_start,
             end: span_end,
         });
+        println!("create_node: {:?}", ast_node);
         self.compiler.push_node(ast_node)
     }
 
