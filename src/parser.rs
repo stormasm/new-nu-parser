@@ -286,6 +286,7 @@ impl Parser {
     }
 
     pub fn expression_or_assignment(&mut self) -> NodeId {
+        println!("expression_or_assignment");
         self.math_expression(true)
     }
 
@@ -294,6 +295,7 @@ impl Parser {
     }
 
     pub fn math_expression(&mut self, allow_assignment: bool) -> NodeId {
+        // println!("math_expression top");
         let mut expr_stack = Vec::<(NodeId, NodeId)>::new();
 
         let mut last_prec = 1000000;
@@ -308,6 +310,7 @@ impl Parser {
         }
 
         // Otherwise assume a math expression
+        println!("math_expression middle: simple_expression");
         let mut leftmost = self.simple_expression();
 
         if let Some(Token {
@@ -395,6 +398,7 @@ impl Parser {
     }
 
     pub fn simple_expression(&mut self) -> NodeId {
+        println!("simple_expression");
         let span_start = self.position();
 
         let mut expr = if self.is_lcurly() {
@@ -625,6 +629,7 @@ impl Parser {
     }
 
     pub fn record_or_closure(&mut self) -> NodeId {
+        println!("record_or_closure");
         let span_start = self.position();
         let mut span_end = self.position(); // TODO: make sure we only initialize it expectedly
 
@@ -927,6 +932,7 @@ impl Parser {
     // directly ripped from `type_params` just changed delimiters
     // FIXME: simplify if appropriate
     pub fn closure_params(&mut self) -> NodeId {
+        println!("closure_params");
         let span_start = self.position();
         let span_end;
         let param_list = {
@@ -1112,6 +1118,7 @@ impl Parser {
     }
 
     pub fn block(&mut self, context: BlockContext) -> NodeId {
+        println!("block");
         let span_start = self.position();
 
         let mut code_body = vec![];
