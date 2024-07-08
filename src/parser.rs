@@ -1666,6 +1666,7 @@ impl Parser {
             start: span_start,
             end: span_end,
         });
+        println!("create_node: {:?}", ast_node);
         self.compiler.push_node(ast_node)
     }
 
